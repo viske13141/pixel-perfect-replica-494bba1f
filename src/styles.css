@@ -171,7 +171,7 @@ html.lenis, html.lenis body { height: auto; }
 .chapter { position: absolute; inset: 0; pointer-events: none; display: flex; padding: clamp(1.5rem, 6vw, 6rem); will-change: opacity; }
 .chapter-scrim { position: absolute; inset: 0; }
 .chapter-body { position: relative; max-width: 34rem; }
-.chapter-eyebrow { font-size: 0.7rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--temple-gold); margin-bottom: 1.25rem; }
+.chapter-eyebrow { font-size: 0.7rem; letter-spacing: 0.38em; text-transform: uppercase; color: var(--temple-gold); margin-bottom: 1.25rem; font-weight: 500; text-shadow: 0 1px 10px oklch(0.15 0.03 50 / 0.8); }
 .chapter-title { font-family: var(--font-display); font-weight: 300; text-transform: uppercase; line-height: 0.95;
   font-size: clamp(2.6rem, 6vw, 6.5rem); color: var(--ivory); text-shadow: 0 2px 30px oklch(0.15 0.03 50 / 0.5); }
 .chapter[data-size="lg"] .chapter-title { font-size: clamp(3rem, 7vw, 8rem); }

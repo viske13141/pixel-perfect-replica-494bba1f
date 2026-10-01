@@ -111,7 +111,8 @@ export function TempleExperience() {
         if (A) {
           ctx.globalAlpha = 1;
           drawImg(A, 1);
-          if (B && t > 0.01 && !reduce) drawImg(B, t);
+          const bt = smooth(clamp((t - 0.4) / 0.2));
+          if (B && bt > 0.01 && !reduce) drawImg(B, bt);
           ctx.globalAlpha = 1;
         }
         last = current;
@@ -143,6 +144,8 @@ export function TempleExperience() {
         const next = progressMarks[i + 1]?.at ?? 1.01;
         m.dataset.active = String(progress >= progressMarks[i].at && progress < next);
       });
+      const hint = document.querySelector<HTMLElement>(".scroll-hint");
+      if (hint) hint.style.visibility = progress > 0.02 ? "hidden" : "visible";
       canvas.style.transform = reduce ? "" : `scale(${1.05 - progress * 0.05})`;
     };
 
