@@ -48,7 +48,7 @@ export function TempleExperience() {
       new Promise<void>((res) => {
         const img = new Image();
         img.decoding = "async";
-        img.src = FRAMES[i];
+        img.src = FRAMES[i]!;
         const done = () => {
           if (disposed) return res();
           images[i] = img;
@@ -124,22 +124,22 @@ export function TempleExperience() {
         el.style.visibility = o < 0.001 ? "hidden" : "visible";
         const drift = reduce ? 0 : (0.5 - local) * 60;
         el.querySelectorAll<HTMLElement>("[data-depth]").forEach((n) => {
-          const depth = parseFloat(n.dataset.depth!);
-          const enter = (1 - o) * (leaving ? -20 : n.dataset.role === "title" ? 40 : 20);
-          const x = n.dataset.role === "eyebrow" && !leaving ? -(1 - o) * 15 : 0;
+          const depth = parseFloat(n.dataset["depth"] ?? "0");
+          const enter = (1 - o) * (leaving ? -20 : n.dataset["role"] === "title" ? 40 : 20);
+          const x = n.dataset["role"] === "eyebrow" && !leaving ? -(1 - o) * 15 : 0;
           n.style.transform = `translate3d(${x}px, ${enter + drift * depth}px, 0)`;
-          if (n.dataset.role === "title") {
+          if (n.dataset["role"] === "title") {
             n.style.filter = `blur(${(1 - o) * 6}px)`;
             n.style.letterSpacing = `${0.02 + (1 - o) * 0.06}em`;
           }
-          if (n.dataset.role === "line") n.style.transform = `scaleY(${clamp(local * 1.4)})`;
+          if (n.dataset["role"] === "line") n.style.transform = `scaleY(${clamp(local * 1.4)})`;
         });
       });
       if (fillRef.current) fillRef.current.style.transform = `scaleY(${progress})`;
       markRefs.current.forEach((m, i) => {
         if (!m) return;
         const next = progressMarks[i + 1]?.at ?? 1.01;
-        m.dataset.active = String(progress >= progressMarks[i].at && progress < next);
+        m.dataset["active"] = String(progress >= progressMarks[i]!.at && progress < next);
       });
       const hint = document.querySelector<HTMLElement>(".scroll-hint");
       if (hint) hint.style.visibility = progress > 0.02 ? "hidden" : "visible";
