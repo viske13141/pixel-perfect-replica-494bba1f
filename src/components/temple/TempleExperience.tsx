@@ -105,14 +105,11 @@ export function TempleExperience() {
       if (Math.abs(target - current) < 0.001) current = target;
       if (needsDraw || current !== last) {
         const f = current * (FRAMES.length - 1);
-        const a = Math.floor(f), t = f - a;
+        const a = Math.round(f);
         const A = images[a] ?? nearest(a);
-        const B = images[Math.min(a + 1, FRAMES.length - 1)];
         if (A) {
           ctx.globalAlpha = 1;
           drawImg(A, 1);
-          const bt = smooth(clamp((t - 0.4) / 0.2));
-          if (B && bt > 0.01 && !reduce) drawImg(B, bt);
           ctx.globalAlpha = 1;
         }
         last = current;
