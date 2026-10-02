@@ -93,11 +93,22 @@ export function TempleExperience() {
       await Promise.all(Array.from({ length: INITIAL }, (_, i) => load(i)));
       if (disposed) return;
       setReady(true);
-      for (let i = INITIAL; i < FRAMES.length; i += 4) {
-        await Promise.all(
-          [i, i + 1, i + 2, i + 3].filter((n) => n < FRAMES.length).map(load),
-        );
-      }
+      // Remaining frames: always fetch the unloaded frame nearest the camera first
+      // (current scene → next scene → nearby → the rest), 4 at a time.
+      const requested = new Set<number>(Array.from({ length: INITIAL }, (_, i) => i));
+      const pick = () => {
+        const here = Math.round(progressToIndex(target));
+        for (let d = 0; d < FRAMES.length; d++) {
+          for (const i of [here + d, here - d]) {
+            if (i >= 0 && i < FRAMES.length && !requested.has(i)) { requested.add(i); return i; }
+          }
+        }
+        return -1;
+      };
+      const worker = async () => {
+        for (let i = pick(); i !== -1 && !disposed; i = pick()) await load(i);
+      };
+      await Promise.all([worker(), worker(), worker(), worker()]);
     })();
 
     // canvas sizing
