@@ -1,7 +1,7 @@
 // Story chapters are defined in FRAME numbers (1-based) of the combined 71-frame
 // sequence, so timing stays correct when frames or scroll weights change.
 //  1–44  original journey (aerial → interior)
-// 45–64  courtyard update: Shiva courtyard, side view, Nandi, Nandi detail, water architecture
+// 45–49 Shiva courtyard · 50–51 side view · 52–57 around Nandi to front · 58–60 Nandi detail · 61–64 water architecture
 // 65–71  original sunset sanctuary reveal
 export type ChapterPosition =
   | "top-left"
@@ -29,8 +29,9 @@ export interface Chapter {
 export const frameWeights: Record<number, number> = {
   45: 1.6, 46: 1.4, // arrival in the Shiva courtyard
   49: 0.6, // darkened frame passes quickly
-  63: 2.2, 64: 2.6, // frontal Nandi — a slow pause
-  57: 0, // (unused key guard)
+  56: 2.2, 57: 2.6, // frontal Nandi — a slow pause
+  58: 1.3, 59: 1.3, 60: 1.3, // dolly toward Nandi's feet
+  64: 1.6, // water architecture settles
   70: 1.5, 71: 2.5, // final reveal settles
 };
 
@@ -54,9 +55,9 @@ export const chapters: Chapter[] = [
   // — courtyard update —
   { id: "courtyard", startFrame: 45, endFrame: 48.5, eyebrow: "The Inner Courtyard", title: ["Stillness", "Held in Water"],
     position: "top-left", size: "sm" },
-  { id: "nandi", startFrame: 62.5, endFrame: 65, eyebrow: "Darshan", title: ["Before Nandi"],
+  { id: "nandi", startFrame: 55.5, endFrame: 58, eyebrow: "Darshan", title: ["Before Nandi"],
     position: "top-right", size: "sm" },
-  { id: "water", startFrame: 59.5, endFrame: 62, eyebrow: "Carried by Many Hands", title: ["Stone Above", "Still Water"],
+  { id: "water", startFrame: 61, endFrame: 64.8, eyebrow: "Carried by Many Hands", title: ["Stone Above", "Still Water"],
     position: "top-right", size: "sm" },
   // — original finale —
   { id: "reveal", startFrame: 66, endFrame: 71, title: ["A Timeless", "Sanctuary"],

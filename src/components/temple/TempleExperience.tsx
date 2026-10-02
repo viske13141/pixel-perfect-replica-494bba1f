@@ -3,13 +3,41 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Lenis from "lenis";
 import frameUrls from "@/assets/temple-frames.json";
-import { chapters, progressMarks, type Chapter } from "./chapters";
+import { chapters as chapterDefs, frameWeights, progressMarks as markDefs } from "./chapters";
 
 const FRAMES = frameUrls as string[];
 const INITIAL = 8;
 
 const clamp = (v: number, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const smooth = (t: number) => t * t * (3 - 2 * t);
+
+// Weighted scroll timeline: each frame-to-frame segment gets a share of scroll
+// proportional to its weight, so the camera can linger at key moments.
+const segW = Array.from({ length: FRAMES.length - 1 }, (_, i) => frameWeights[i + 1] ?? 1);
+const total = segW.reduce((a, b) => a + b, 0);
+const cum = [0];
+segW.forEach((w) => cum.push(cum[cum.length - 1]! + w));
+/** 1-based (fractional) frame number → scroll progress 0..1 */
+const frameToProgress = (frame: number) => {
+  const f = clamp(frame - 1, 0, FRAMES.length - 1);
+  const i = Math.min(Math.floor(f), segW.length - 1);
+  return (cum[i]! + segW[i]! * (f - i)) / total;
+};
+/** scroll progress → 0-based fractional frame index */
+const progressToIndex = (p: number) => {
+  const d = clamp(p) * total;
+  let i = 0;
+  while (i < segW.length - 1 && cum[i + 1]! <= d) i++;
+  return i + (segW[i]! ? (d - cum[i]!) / segW[i]! : 0);
+};
+
+type Chapter = (typeof chapterDefs)[number] & { start: number; end: number };
+const chapters: Chapter[] = chapterDefs.map((c) => ({
+  ...c,
+  start: c.startFrame <= 1 ? 0 : frameToProgress(c.startFrame),
+  end: frameToProgress(c.endFrame),
+}));
+const progressMarks = markDefs.map((m) => ({ label: m.label, at: frameToProgress(m.frame) }));
 
 function chapterState(c: Chapter, p: number) {
   const len = c.end - c.start;
@@ -104,7 +132,7 @@ export function TempleExperience() {
       current += (target - current) * (reduce ? 1 : 0.14);
       if (Math.abs(target - current) < 0.001) current = target;
       if (needsDraw || current !== last) {
-        const f = current * (FRAMES.length - 1);
+        const f = progressToIndex(current);
         const a = Math.round(f);
         const A = images[a] ?? nearest(a);
         if (A) {

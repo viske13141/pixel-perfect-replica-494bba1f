@@ -158,7 +158,7 @@ html, body { background: var(--ink); color: var(--ivory); font-family: var(--fon
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 
-.temple-track { position: relative; height: 1100vh; }
+.temple-track { position: relative; height: 1700vh; }
 .temple-stage { position: sticky; top: 0; height: 100vh; width: 100vw; overflow: hidden; background: var(--ink); }
 .temple-canvas { position: absolute; inset: 0; width: 100%; height: 100%; will-change: transform; transform-origin: 50% 45%; }
 .temple-vignette { position: absolute; inset: 0; pointer-events: none;
