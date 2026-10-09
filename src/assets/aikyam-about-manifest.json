@@ -1,0 +1,69 @@
+{
+  "asset_type": "original_still_keyframes_not_video_frame_sequence",
+  "sequences": [
+    {
+      "folder": "sequence_01",
+      "sections": [
+        {
+          "id": "hero",
+          "title": "AIKYAM — From Separation to Wholeness",
+          "images": ["sequence_01/01_entrance.jpg", "sequence_01/02_main_tower.jpg"]
+        },
+        {
+          "id": "meaning",
+          "title": "What is AIKYAM?",
+          "images": ["sequence_01/03_carved_passage.jpg", "sequence_01/04_carvings.jpg"]
+        },
+        {
+          "id": "shiva-shakti",
+          "title": "Shiva & Shakti",
+          "images": ["sequence_01/05_stone_sculpture.jpg", "sequence_01/06_water.jpg"]
+        }
+      ]
+    },
+    {
+      "folder": "sequence_02",
+      "sections": [
+        {
+          "id": "vision",
+          "title": "Vision & Purpose",
+          "images": ["sequence_02/01_vision_shrine_overview.jpg"]
+        },
+        {
+          "id": "four-gates",
+          "title": "The Four Gates",
+          "images": [
+            "sequence_02/02_shrine_courtyard.jpg",
+            "sequence_02/03_carved_passage.jpg",
+            "sequence_02/04_carved_figures.jpg"
+          ]
+        },
+        {
+          "id": "centre",
+          "title": "I Integrate",
+          "images": ["sequence_02/05_main_entrance.jpg"]
+        }
+      ]
+    },
+    {
+      "folder": "sequence_03",
+      "sections": [
+        {
+          "id": "everyday",
+          "title": "AIKYAM in Everyday Life",
+          "images": ["sequence_03/01_everyday_reflection.jpg"]
+        },
+        {
+          "id": "physical-digital",
+          "title": "Physical & Digital Journey",
+          "images": ["sequence_03/02_connected_journey.jpg"]
+        },
+        {
+          "id": "next",
+          "title": "Continue Your Journey",
+          "images": ["sequence_03/03_continue_your_journey.jpg"]
+        }
+      ]
+    }
+  ]
+}

@@ -10,33 +10,81 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AikyaMandalaRouteImport } from './routes/aikya-mandala'
+import { Route as ParticipateRouteImport } from './routes/participate'
+import { Route as AikyaMandalaShaktiRouteImport } from './routes/aikya-mandala_.shakti'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AikyaMandalaRoute = AikyaMandalaRouteImport.update({
+  id: '/aikya-mandala',
+  path: '/aikya-mandala',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ParticipateRoute = ParticipateRouteImport.update({
+  id: '/participate',
+  path: '/participate',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AikyaMandalaShaktiRoute = AikyaMandalaShaktiRouteImport.update({
+  id: '/aikya-mandala_/shakti',
+  path: '/aikya-mandala/shakti',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/aikya-mandala': typeof AikyaMandalaRoute
+  '/participate': typeof ParticipateRoute
+  '/aikya-mandala/shakti': typeof AikyaMandalaShaktiRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/aikya-mandala': typeof AikyaMandalaRoute
+  '/participate': typeof ParticipateRoute
+  '/aikya-mandala/shakti': typeof AikyaMandalaShaktiRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/aikya-mandala': typeof AikyaMandalaRoute
+  '/participate': typeof ParticipateRoute
+  '/aikya-mandala_/shakti': typeof AikyaMandalaShaktiRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/about' | '/aikya-mandala' | '/participate' | '/aikya-mandala/shakti'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/about' | '/aikya-mandala' | '/participate' | '/aikya-mandala/shakti'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/aikya-mandala'
+    | '/participate'
+    | '/aikya-mandala_/shakti'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
+  AikyaMandalaRoute: typeof AikyaMandalaRoute
+  ParticipateRoute: typeof ParticipateRoute
+  AikyaMandalaShaktiRoute: typeof AikyaMandalaShaktiRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +96,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aikya-mandala': {
+      id: '/aikya-mandala'
+      path: '/aikya-mandala'
+      fullPath: '/aikya-mandala'
+      preLoaderRoute: typeof AikyaMandalaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/participate': {
+      id: '/participate'
+      path: '/participate'
+      fullPath: '/participate'
+      preLoaderRoute: typeof ParticipateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/aikya-mandala_/shakti': {
+      id: '/aikya-mandala_/shakti'
+      path: '/aikya-mandala/shakti'
+      fullPath: '/aikya-mandala/shakti'
+      preLoaderRoute: typeof AikyaMandalaShaktiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
+  AikyaMandalaRoute: AikyaMandalaRoute,
+  ParticipateRoute: ParticipateRoute,
+  AikyaMandalaShaktiRoute: AikyaMandalaShaktiRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

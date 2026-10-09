@@ -1,0 +1,481 @@
+/* ── Shakti Journey Page ─────────────────────────────────────────────────── */
+
+.shakti-page {
+  background: var(--ink);
+  color: var(--ivory);
+}
+
+/* ── Word-split spans for text reveal ───────────────────────────────────── */
+.shakti-word {
+  display: inline-block;
+}
+
+/* ── Hero ────────────────────────────────────────────────────────────────── */
+.shakti-intro {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 7vw 12vh;
+  overflow: hidden;
+  /* Isolate so the frame canvas behind the chapter label never bleeds in */
+  isolation: isolate;
+  z-index: 0;
+}
+
+.shakti-intro-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ink);
+  overflow: hidden;
+}
+
+.shakti-intro-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  opacity: 0.38;
+  /* Restrained zoom on load — CSS only, no JS needed */
+  animation: shakti-hero-zoom 18s ease-out forwards;
+}
+
+@keyframes shakti-hero-zoom {
+  from { transform: scale(1.06); }
+  to   { transform: scale(1.0); }
+}
+
+/* Dark overlay for readability */
+.shakti-intro-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    0deg,
+    oklch(0.14 0.02 60 / 0.97) 0%,
+    oklch(0.14 0.02 60 / 0.72) 45%,
+    oklch(0.14 0.02 60 / 0.38) 100%
+  );
+}
+
+.shakti-intro-content {
+  position: relative;
+  z-index: 2;
+  max-width: 46rem;
+}
+
+.shakti-intro-content .aikyam-eyebrow {
+  margin-bottom: 1.4rem;
+}
+
+.shakti-intro-content h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.8rem, 5.5vw, 6rem);
+  line-height: 1.05;
+  margin-bottom: 1rem;
+}
+
+.shakti-intro-subtitle {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  color: var(--temple-gold);
+  letter-spacing: 0.06em;
+  margin-bottom: 1.8rem;
+}
+
+.shakti-intro-desc {
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+  line-height: 1.8;
+  color: var(--cream);
+  max-width: 32rem;
+  margin-bottom: 2.5rem;
+}
+
+.shakti-scroll-cue {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--temple-gold);
+  animation: shakti-hint 2.4s ease-in-out infinite;
+}
+
+@keyframes shakti-hint {
+  0%, 100% { opacity: 0.4; transform: translateY(0); }
+  50%       { opacity: 0.9; transform: translateY(5px); }
+}
+
+/* ── Chapter label ───────────────────────────────────────────────────────── */
+.shakti-chapter-label {
+  padding: 6rem 7vw 2rem;
+  background: var(--ink);
+  position: relative;
+  z-index: 2;
+}
+
+.shakti-chapter-label h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2rem, 3.5vw, 3.5rem);
+  margin-top: 0.8rem;
+}
+
+/* ── Frame chapter ───────────────────────────────────────────────────────── */
+.shakti-frame-track {
+  position: relative;
+}
+
+.shakti-frame-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.shakti-frame-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.shakti-frame-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at center, transparent 50%, oklch(0.12 0.02 50 / 0.5) 100%);
+}
+
+/* ── Goddess overlay panels (frame chapter) ─────────────────────────────── */
+.shakti-goddess-panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+  padding: clamp(1.5rem, 6vw, 6rem);
+}
+
+.shakti-goddess-panel[data-side="left"]  { justify-content: flex-start; }
+.shakti-goddess-panel[data-side="right"] { justify-content: flex-end; }
+
+.shakti-goddess-scrim {
+  position: absolute;
+  inset: 0;
+}
+
+.shakti-goddess-panel[data-side="left"] .shakti-goddess-scrim {
+  background: linear-gradient(90deg, oklch(0.12 0.02 60 / 0.82), transparent 55%);
+}
+
+.shakti-goddess-panel[data-side="right"] .shakti-goddess-scrim {
+  background: linear-gradient(270deg, oklch(0.12 0.02 60 / 0.82), transparent 55%);
+}
+
+.shakti-goddess-body {
+  position: relative;
+  z-index: 2;
+  max-width: 30rem;
+}
+
+.shakti-goddess-panel[data-side="right"] .shakti-goddess-body {
+  text-align: right;
+}
+
+/* ── Shared text styles ──────────────────────────────────────────────────── */
+.shakti-seq {
+  font-size: 0.6rem;
+  letter-spacing: 0.3em;
+  color: var(--bronze);
+  margin-bottom: 0.8rem;
+  font-family: var(--font-body);
+}
+
+.shakti-goddess-name {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.2rem, 4vw, 4.5rem);
+  line-height: 1.0;
+  color: var(--ivory);
+  margin-bottom: 0.6rem;
+}
+
+.shakti-goddess-location {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--temple-gold);
+  margin-bottom: 1.2rem;
+}
+
+.shakti-goddess-desc {
+  font-size: 0.9rem;
+  line-height: 1.75;
+  color: var(--cream);
+  max-width: 26rem;
+}
+
+.shakti-goddess-panel[data-side="right"] .shakti-goddess-desc {
+  margin-left: auto;
+}
+
+/* ── Frame chapter progress bar ─────────────────────────────────────────── */
+.shakti-frame-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: oklch(0.97 0.018 85 / 0.12);
+}
+
+.shakti-frame-progress-fill {
+  height: 100%;
+  background: var(--temple-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+/* ── Still chapter: half-image / half-content ───────────────────────────── */
+.shakti-still-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100svh;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Image LEFT, content RIGHT (default / odd) */
+.shakti-still-section[data-side="right"] {
+  /* image right, content left — reverse column order */
+  direction: rtl;
+}
+
+.shakti-still-section[data-side="right"] > * {
+  direction: ltr;
+}
+
+.shakti-still-img-col {
+  position: relative;
+  overflow: hidden;
+  min-height: 60svh;
+}
+
+.shakti-still-img-col img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center 20%;
+  /* contain keeps the full figure visible; background fills the rest */
+  background: var(--ink);
+  will-change: transform;
+}
+
+/* Subtle edge fade between image and content */
+.shakti-still-section[data-side="left"] .shakti-still-img-col::after,
+.shakti-still-section[data-side="right"] .shakti-still-img-col::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.shakti-still-section[data-side="left"] .shakti-still-img-col::after {
+  background: linear-gradient(90deg, transparent 70%, oklch(0.14 0.02 60 / 0.7));
+}
+
+.shakti-still-section[data-side="right"] .shakti-still-img-col::after {
+  background: linear-gradient(270deg, transparent 70%, oklch(0.14 0.02 60 / 0.7));
+}
+
+/* Top/bottom fade for cinematic transition feel */
+.shakti-still-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    0deg,
+    oklch(0.14 0.02 55 / 0.6) 0%,
+    transparent 12%,
+    transparent 88%,
+    oklch(0.14 0.02 55 / 0.6) 100%
+  );
+}
+
+.shakti-still-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 6vw, 6rem) clamp(2rem, 5vw, 5rem);
+  max-width: 36rem;
+}
+
+/* When image is on the right (data-side="right"), content is on the left.
+   The direction:rtl trick reverses columns; content padding stays LTR. */
+.shakti-still-section[data-side="right"] .shakti-still-copy {
+  margin-left: auto;
+}
+
+/* ── Closing section ─────────────────────────────────────────────────────── */
+.shakti-closing {
+  padding: 8rem 7vw;
+  background: var(--ink);
+  min-height: 50svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.shakti-closing-heading {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.5rem, 4.5vw, 5rem);
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+}
+
+.shakti-closing p {
+  color: var(--cream);
+  font-size: 0.95rem;
+  line-height: 1.8;
+  max-width: 32rem;
+  margin-bottom: 2.5rem;
+}
+
+/* ── About page: Shakti link style ──────────────────────────────────────── */
+a.restored-item-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+
+a.restored-item-link:hover,
+a.restored-item-link:focus-visible {
+  background: oklch(0.97 0.018 85 / 0.05);
+  outline: 2px solid var(--temple-gold);
+  outline-offset: 4px;
+}
+
+a.restored-item-link h3 {
+  color: var(--temple-gold);
+}
+
+.restored-item-cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--temple-gold);
+  border-bottom: 1px solid var(--bronze);
+  padding-bottom: 0.2rem;
+}
+
+/* ── Reduced motion ──────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .shakti-scroll-cue,
+  .shakti-intro-bg img {
+    animation: none;
+  }
+
+  /* Show all text immediately */
+  .shakti-word,
+  .shakti-intro-subtitle,
+  .shakti-intro-desc,
+  .shakti-seq,
+  .shakti-goddess-name,
+  .shakti-goddess-location,
+  .shakti-goddess-desc,
+  .shakti-closing-heading,
+  .shakti-closing p,
+  .aikyam-actions {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .shakti-still-img-col img {
+    will-change: auto;
+  }
+}
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 767px) {
+  .shakti-intro {
+    padding: 0 6vw 10vh;
+  }
+
+  /* Frame chapter: text to bottom */
+  .shakti-goddess-panel {
+    align-items: flex-end;
+    padding-bottom: 14vh;
+  }
+
+  .shakti-goddess-panel[data-side="left"],
+  .shakti-goddess-panel[data-side="right"] {
+    justify-content: flex-start;
+  }
+
+  .shakti-goddess-panel[data-side="right"] .shakti-goddess-body {
+    text-align: left;
+  }
+
+  .shakti-goddess-panel[data-side="left"] .shakti-goddess-scrim,
+  .shakti-goddess-panel[data-side="right"] .shakti-goddess-scrim {
+    background: linear-gradient(0deg, oklch(0.12 0.02 60 / 0.9), transparent 55%);
+  }
+
+  /* Still chapter: stack image above content */
+  .shakti-still-section {
+    grid-template-columns: 1fr;
+    direction: ltr !important;
+    min-height: auto;
+  }
+
+  .shakti-still-section[data-side="right"] > * {
+    direction: ltr;
+  }
+
+  .shakti-still-img-col {
+    min-height: 55vw;
+    max-height: 70vw;
+  }
+
+  .shakti-still-img-col img {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .shakti-still-section[data-side="left"] .shakti-still-img-col::after,
+  .shakti-still-section[data-side="right"] .shakti-still-img-col::after {
+    background: linear-gradient(0deg, oklch(0.14 0.02 60 / 0.5), transparent 40%);
+  }
+
+  .shakti-still-copy {
+    padding: 2rem 6vw 3rem;
+    max-width: 100%;
+  }
+
+  .shakti-still-section[data-side="right"] .shakti-still-copy {
+    margin-left: 0;
+  }
+
+  .shakti-chapter-label {
+    padding: 4rem 6vw 1.5rem;
+  }
+}

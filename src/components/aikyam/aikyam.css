@@ -1,0 +1,385 @@
+.aikyam-page {
+  background: var(--ink);
+  color: var(--ivory);
+}
+.aikyam-page a,
+.aikyam-page button {
+  -webkit-tap-highlight-color: transparent;
+}
+.aikyam-page :focus-visible {
+  outline: 2px solid var(--temple-gold);
+  outline-offset: 6px;
+}
+.aikyam-nav {
+  position: fixed;
+  z-index: 30;
+  inset: 0 0 auto;
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 4vw;
+  background: linear-gradient(oklch(0.16 0.02 60 / 0.96), oklch(0.16 0.02 60 / 0.7));
+  border-bottom: 1px solid oklch(0.97 0.018 85 / 0.15);
+}
+.aikyam-brand {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  letter-spacing: 0.18em;
+}
+.aikyam-brand span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.5rem;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+.aikyam-nav nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 2.3vw, 2.5rem);
+  font-size: 0.75rem;
+}
+.aikyam-nav a:hover,
+.aikyam-footer a:hover {
+  color: var(--temple-gold);
+}
+.aikyam-nav .about-skip {
+  color: var(--temple-gold);
+  border-left: 1px solid var(--bronze);
+  padding-left: 1.5rem;
+}
+.aikyam-eyebrow {
+  color: var(--temple-gold);
+  font-size: 0.65rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  margin-bottom: 1.7rem;
+}
+.about-stage {
+  position: relative;
+}
+.about-visuals,
+.about-shade,
+.about-stage-bottom,
+.about-progress {
+  display: none;
+}
+.about-chapter {
+  position: relative;
+  min-height: 85svh;
+  padding: 8rem 7vw 5rem;
+  display: flex;
+  align-items: center;
+  isolation: isolate;
+}
+.about-static-image {
+  position: absolute;
+  inset: 0;
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  opacity: 0.4;
+  z-index: -2;
+}
+.about-chapter::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, oklch(0.12 0.02 60 / 0.85), oklch(0.12 0.02 60 / 0.2));
+  z-index: -1;
+}
+.about-copy {
+  max-width: 43rem;
+}
+.about-copy h1,
+.about-copy h2,
+.about-outro h2,
+.aikyam-intro h1 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.8rem, 5.5vw, 6rem);
+  line-height: 1.03;
+  text-wrap: balance;
+}
+.about-wordmark {
+  display: block;
+  font-size: 0.4em;
+  letter-spacing: 0.28em;
+  color: var(--temple-gold);
+  margin-bottom: 1.3rem;
+}
+.about-description {
+  max-width: 31rem;
+  font-size: clamp(0.9rem, 1.15vw, 1.05rem);
+  line-height: 1.8;
+  margin-top: 1.6rem;
+  color: var(--cream);
+}
+.about-gates {
+  margin-top: 1.3rem;
+  max-width: 32rem;
+}
+.about-gates li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid oklch(0.97 0.018 85 / 0.2);
+  font-size: 0.8rem;
+}
+.about-gates strong {
+  font-weight: 500;
+}
+.about-gates strong span {
+  font-size: 0.65rem;
+  color: var(--temple-gold);
+  letter-spacing: 0.07em;
+}
+.about-gates li > span {
+  color: var(--cream);
+  font-size: 0.72rem;
+}
+.about-animated .about-track {
+  height: 1810svh;
+}
+.about-animated .about-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+.about-animated .about-visuals {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+}
+.about-visual {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transform-origin: center;
+}
+.about-visual:first-child {
+  opacity: 1;
+}
+.about-animated .about-shade {
+  display: block;
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      oklch(0.12 0.02 60 / 0.88),
+      oklch(0.12 0.02 60 / 0.38) 48%,
+      transparent 85%
+    ),
+    linear-gradient(0deg, oklch(0.12 0.02 60 / 0.65), transparent 30%);
+}
+.about-animated .about-chapters {
+  position: absolute;
+  inset: 0;
+}
+.about-animated .about-chapter {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+  padding: 7rem 7vw 5rem;
+  opacity: 0;
+  pointer-events: none;
+}
+.about-animated .about-chapter:first-child {
+  opacity: 1;
+}
+.about-animated .about-static-image,
+.about-animated .about-chapter::before {
+  display: none;
+}
+.about-animated .about-stage-bottom {
+  position: absolute;
+  bottom: 1.7rem;
+  inset-inline: 4vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--cream);
+}
+.about-stage-bottom button {
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+.about-animated .about-progress {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: oklch(0.97 0.018 85 / 0.15);
+}
+.about-progress-fill {
+  height: 100%;
+  background: var(--temple-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+.about-outro {
+  padding: 8rem 7vw;
+  min-height: 70svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-margin-top: 100px;
+}
+.aikyam-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  margin-top: 3rem;
+}
+.aikyam-actions a {
+  border-bottom: 1px solid var(--bronze);
+  padding: 1rem 0;
+  font-size: 0.8rem;
+  color: var(--temple-gold);
+}
+.aikyam-actions span {
+  margin-left: 1rem;
+}
+.aikyam-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  border-top: 1px solid var(--bronze);
+  padding: 2rem 4vw;
+  color: var(--cream);
+  font-size: 0.75rem;
+}
+.aikyam-intro {
+  max-width: 70rem;
+  margin: auto;
+  padding: 11rem 7vw 6rem;
+  min-height: 85svh;
+}
+.aikyam-intro h1 {
+  margin-bottom: 2rem;
+}
+.aikyam-intro > p:not(.aikyam-eyebrow) {
+  max-width: 40rem;
+  line-height: 1.9;
+  color: var(--cream);
+}
+.mandala-paths {
+  margin-block: 3rem;
+}
+.mandala-paths > div {
+  border-top: 1px solid var(--bronze);
+  padding: 1.4rem 0;
+}
+.mandala-paths dt {
+  font-family: var(--font-display);
+  font-size: 2rem;
+}
+.mandala-paths dt span {
+  font-family: var(--font-body);
+  color: var(--temple-gold);
+  font-size: 0.75rem;
+}
+.mandala-paths dd {
+  margin-top: 0.5rem;
+  color: var(--cream);
+  font-size: 0.85rem;
+}
+.participation-note {
+  margin-block: 2rem 4rem;
+}
+.aikyam-back {
+  display: inline-block;
+  margin-top: 2rem;
+  color: var(--temple-gold);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+@media (max-width: 767px) {
+  .aikyam-nav {
+    min-height: 110px;
+    padding: 0.85rem 5vw;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+  .aikyam-brand {
+    font-size: 1.3rem;
+  }
+  .aikyam-brand span {
+    display: none;
+  }
+  .aikyam-nav nav {
+    width: 100%;
+    justify-content: space-between;
+    gap: 0.65rem;
+    font-size: 0.65rem;
+  }
+  .aikyam-nav .about-skip {
+    padding-left: 0.6rem;
+  }
+  .about-animated .about-chapter {
+    align-items: flex-end;
+    padding: 8rem 6vw 6rem;
+  }
+  .about-copy {
+    max-width: 100%;
+  }
+  .about-copy h1,
+  .about-copy h2 {
+    font-size: clamp(2.5rem, 9vw, 3.8rem);
+  }
+  .about-description {
+    margin-top: 1rem;
+    line-height: 1.65;
+  }
+  .aikyam-eyebrow {
+    margin-bottom: 1rem;
+    font-size: 0.6rem;
+  }
+  .about-animated .about-shade {
+    background: linear-gradient(
+      0deg,
+      oklch(0.12 0.02 60 / 0.95),
+      oklch(0.12 0.02 60 / 0.7) 45%,
+      oklch(0.12 0.02 60 / 0.1) 85%
+    );
+  }
+  .about-stage-bottom > span:first-child {
+    display: none;
+  }
+  .about-animated .about-stage-bottom {
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+  }
+  .about-outro {
+    padding: 6rem 6vw;
+    scroll-margin-top: 110px;
+  }
+  .aikyam-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .about-page *,
+  .about-page *::before {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

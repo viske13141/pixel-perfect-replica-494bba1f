@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { TempleExperience } from "@/components/temple/TempleExperience";
+import { SiteNav } from "@/components/aikyam/SiteLayout";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -12,5 +13,14 @@ export const Route = createFileRoute("/")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
-  component: TempleExperience,
+  component: HomePage,
 });
+
+function HomePage() {
+  return (
+    <div className="aikyam-page">
+      <SiteNav />
+      <TempleExperience />
+    </div>
+  );
+}
