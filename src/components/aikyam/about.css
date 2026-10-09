@@ -108,9 +108,39 @@ a.restored-item-link h3 {
   object-fit: cover;
   object-position: center;
 }
+
+/* Soft frosted warm panel behind text — readable without a heavy black block */
 .restored-backdrop {
-  display: none;
+  position: absolute;
+  z-index: -1;
+  inset-block: 0;
+  left: 0;
+  width: min(860px, 68vw);
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    oklch(0.22 0.03 65 / 0.55),
+    oklch(0.22 0.03 65 / 0.35) 65%,
+    transparent
+  );
+  backdrop-filter: blur(18px) saturate(0.8);
+  -webkit-backdrop-filter: blur(18px) saturate(0.8);
+  mask-image: linear-gradient(90deg, black 60%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, black 60%, transparent);
 }
+.restored-chapter[data-side="right"] .restored-backdrop {
+  left: auto;
+  right: 0;
+  background: linear-gradient(
+    270deg,
+    oklch(0.22 0.03 65 / 0.55),
+    oklch(0.22 0.03 65 / 0.35) 65%,
+    transparent
+  );
+  mask-image: linear-gradient(270deg, black 60%, transparent);
+  -webkit-mask-image: linear-gradient(270deg, black 60%, transparent);
+}
+
 .about-restored-motion .restored-stage-track {
   display: block;
   position: absolute;
@@ -156,7 +186,7 @@ a.restored-item-link h3 {
   width: min(43rem, 80vw);
 }
 .about-restored-motion .restored-backdrop {
-  display: none;
+  z-index: 1;
 }
 .restored-controls {
   display: none;
@@ -208,11 +238,22 @@ a.restored-item-link h3 {
   .about-restored .about-copy h2 {
     font-size: clamp(2.5rem, 8vw, 3.8rem);
   }
-  .restored-backdrop {
-    display: none;
+  .restored-backdrop,
+  .restored-chapter[data-side="right"] .restored-backdrop {
+    width: 100%;
+    mask-image: none;
+    -webkit-mask-image: none;
+    background: oklch(0.2 0.025 65 / 0.5);
+    backdrop-filter: blur(14px) saturate(0.8);
+    -webkit-backdrop-filter: blur(14px) saturate(0.8);
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .restored-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: oklch(0.2 0.025 65 / 0.65);
+  }
   .restored-static img {
     position: relative;
     height: 100%;
